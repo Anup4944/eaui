@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { LoginForm } from '../../components/login-form/LoginForm';
+import './login.css'
+
 
 const Login = () => {
     return (
-        <div>
-            I am a login page.
+        <div className="login-page bg-primary">
+            <LoginForm/>
+            
+
+            
         </div>
     )
 }
