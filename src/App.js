@@ -9,21 +9,27 @@ import './App.css';
 import DefaultLayout from "./components/layout/DefaultLayout";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { Button } from "react-bootstrap";
+import PasswordReset from "./pages/password-reset/PasswordReset";
 
 function App() {
   return (
    <div className="App">
      <Router>
        <Switch>
-    <Router path= "/login">
-      <Login/>
+
+    <Router path= "/dashboard">
+      <Dashboard />
       </Router>
 
-    <Router path="/dashboard">
-      <Dashboard/>
-
+    <Router path="/reset-password">
+      <PasswordReset />
     </Router>
 
+    <Router path="/">
+      <Login />
+    </Router>
+
+ 
 
 
     </Switch>
