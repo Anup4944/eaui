@@ -2,25 +2,27 @@ import React from 'react'
 import { Container } from 'react-bootstrap';
 import Footer from "./partials/Footer";
 import Header from './partials/Header';
-import { Row, Col } from "react-bootstrap";
+import { Row, Col,Jumbotron } from "react-bootstrap";
 import "./DefaultLayout.css";
+import SideBarNav from '../sidebar/SideBarNav';
 
 const DefaultLayout = ({children}) => {
     return (
-        <div fluid>
-            <Row>
-                <Col>
+        <div fluid className="default-layout">
+            
                 <div className="left-bar">
-                I am from the left menu.
-                </div></Col>
-                <Col>
-                <div className="main">
-                <Header />
-                {children}
-            <Footer />
+                <div className="admin logo p-2 mb-5">Admin Pannels</div>
+
+                <SideBarNav />
                 </div>
-                </Col>
-            </Row>
+               
+                <div className="main">
+                <Header /> 
+                <Jumbotron>{children}</Jumbotron>
+                
+                <Footer />
+                </div>
+                
        
             
 

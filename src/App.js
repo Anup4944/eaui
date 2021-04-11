@@ -8,6 +8,7 @@ import {
 import './App.css';
 import DefaultLayout from "./components/layout/DefaultLayout";
 import Dashboard from "./pages/dashboard/Dashboard";
+import Category from "./pages/category/Category";
 import { Button } from "react-bootstrap";
 import PasswordReset from "./pages/password-reset/PasswordReset";
 
@@ -19,6 +20,10 @@ function App() {
 
     <Router path= "/dashboard">
       <Dashboard />
+      </Router>
+
+      <Router path= "/category">
+      <Category />
       </Router>
 
     <Router path="/reset-password">
