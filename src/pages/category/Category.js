@@ -1,5 +1,5 @@
 import React from 'react'
-import AddCategoryForm from '../../components/add-category form/AddCategoryForm';
+import AddCategoryForm from '../../components/add-category-form/AddCategoryForm';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Footer from "../../components/layout/partials/Footer";
 import Header from "../../components/layout/partials/Header";
