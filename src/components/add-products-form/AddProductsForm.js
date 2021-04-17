@@ -38,7 +38,7 @@ const handleOnChange = e => {
 
 const handleOnSubmit = e =>{
     e.preventDefault();
-    
+
 }
 
 
@@ -87,20 +87,20 @@ const handleOnSubmit = e =>{
     <Form.Control name="description" type="textarea" placeholder="Write Full description" value={newProduct.description} onChange={handleOnChange} required/>
   </Form.Group>
   
-  <Form.Group >
+  {/* <Form.Group >
   <Form.Label>Images</Form.Label>
     <Form.Control name="images" type="file"  onChange={handleOnChange} value={newProduct.images} multiple  />
-  </Form.Group>
+  </Form.Group> */}
 
   <Form.Group controlId="exampleForm.ControlSelect2">
-    <Form.Label>Categories</Form.Label>
+    {/* <Form.Label>Categories</Form.Label>
     <Form.Control as="select" value={newProduct.categories} onChange={handleOnChange} multiple >
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
       <option>5</option>
-    </Form.Control>
+    </Form.Control> */}
   </Form.Group>
   <Button variant="primary" type="submit">
     Submit
