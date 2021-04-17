@@ -11,6 +11,9 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Category from "./pages/category/Category";
 import { Button } from "react-bootstrap";
 import PasswordReset from "./pages/password-reset/PasswordReset";
+import Products from "./pages/products/Products.js";
+import ProductsListsTable from "./components/product-table/ProductsListsTable";
+import AddProducts from "./pages/products/AddProducts";
 
 function App() {
   return (
@@ -18,21 +21,29 @@ function App() {
      <Router>
        <Switch>
 
-    <Router path= "/dashboard">
+    <Route exact path= "/dashboard">
       <Dashboard />
-      </Router>
+      </Route>
 
-      <Router path= "/category">
+      <Route exact path= "/category">
       <Category />
-      </Router>
+      </Route>
 
-    <Router path="/reset-password">
+      <Route exact path= "/products">
+      <Products />
+      </Route>
+
+      <Route exact path= "/products/new">
+      <AddProducts />
+      </Route>
+
+    <Route exact path="/reset-password">
       <PasswordReset />
-    </Router>
+    </Route>
 
-    <Router path="/">
+    <Route path="/">
       <Login />
-    </Router>
+    </Route>
 
  
 

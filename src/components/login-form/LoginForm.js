@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Form,Row,Col,Card,Button } from "react-bootstrap";
 import  "./loginform.style.css";
+import { useHistory } from "react-router-dom";
 
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
 
 
 export const LoginForm = () => {
+const history = useHistory()
 
  const [login, setLogin] = useState(initialState) // to get the data from userbox
 
@@ -27,6 +29,8 @@ export const LoginForm = () => {
  
  const handleOnSubmit = e=>{ 
    e.preventDefault(); /// prevent automactic loading 
+   console.log(login)
+   history.push("/dashboard")
    
 
 

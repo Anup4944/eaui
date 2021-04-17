@@ -1,21 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
 
 import { Row, Col,Button,Form,Spinner, Alert } from "react-bootstrap";
 // import { saveCategories,getCategories } from "../add-category-form/AddCategoryForm.js";
 
-import { AddCategory, addNewCategory } from "../../pages/category/CategoryAction.js";
+import {  addNewCategory,fetchCategory } from "../../pages/category/CategoryAction.js";
 
 const initialState = {
-    name : "",
-   
-    parentCat : 0 ,
+    name : ""
 }
 
 export const AddCategoryForm = () => {
-  const dispatch = useDispatch()
-  const{isLoading, status, message} = useSelector (state => state.category)
+const dispatch = useDispatch()
+const{isLoading, status, message, categoryList} = useSelector (state => state.category);
+
+console.log(categoryList)
+
+useEffect(()=>{
+  dispatch(fetchCategory());
+
+}, [dispatch])
 
 const [category, setCategory] = useState(initialState)
 
@@ -24,8 +29,6 @@ const handleOnChange = e =>{
 
     setCategory({
         ...category,
-
-        
         [name] : value,
     })
 }
@@ -58,14 +61,17 @@ const handleOnSubmit = e =>{
              <Form.Row>
     <Form.Group as={Col} controlId="formGridEmail">
       <Form.Label> Add New Category</Form.Label>
-      <Form.Control name="name" type="text" defaultValue={category.parentCat} onChange={handleOnChange} placeholder="Enter new Category" />
+      <Form.Control name="name" type="text"  onChange={handleOnChange} placeholder="Enter new Category"  required/>
     </Form.Group>
 
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>Parent Category</Form.Label>
       <Form.Control as="select" name="parentCat"  onChange={handleOnChange} defaultValue={category.parentCat}>
         <option>Choose...</option>
-        <option>...</option>
+        {
+          categoryList?.map((row,i) => <option key={i} value={row._id}>{row.name}</option> )
+        }
+        
       </Form.Control>
     </Form.Group>
     </Form.Row>
