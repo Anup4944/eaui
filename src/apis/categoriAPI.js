@@ -1,56 +1,52 @@
-import axios from 'axios'; 
-const rootUrl = "http://localhost:8000/api/v1/"
-const catApi = rootUrl + 'category'
- 
-export const saveCategories = frmDt => {
-    console.log("from api", frmDt)
-    return new Promise(async(resolve, reject) =>{
-        try {
+import axios from "axios";
 
-            const {data} = await axios.post(catApi, frmDt)
-        
-            resolve(data);
-            
-        } catch (error) {
-            reject(error);
-            
-        }
-    })
+const rootUrl = "http://localhost:8000/api/v1/";
+const catApi = rootUrl + "category";
 
+export const saveCategory = frmDt => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.post(catApi, frmDt);
 
-}
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
 
+export const updateCategories = frmDt => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.put(catApi, frmDt);
+
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
 
 export const getCategories = () => {
-    return new Promise(async(resolve, reject) =>{
-        try {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.get(catApi);
 
-            const {data} = await axios.get(catApi)
-        
-            resolve(data);
-            
-        } catch (error) {
-            reject(error);
-            
-        }
-    })
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
 
+export const deleteCategories = idArg => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.delete(catApi, { data: idArg });
 
-}
-
-export const deleteCategories = (IdsArg) => {
-    return new Promise(async(resolve, reject) =>{
-        try {
-
-            const {data} = await axios.delete(catApi, [data=IdsArg]);
-        
-            resolve(data);
-            
-        } catch (error) {
-            reject(error);
-            
-        }
-    })
-
-
-}
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};

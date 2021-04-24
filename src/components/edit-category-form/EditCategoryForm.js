@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ModalBox from "../modal/ModalBox.js";
 
 import { Form, Col, Button, Spinner, Alert } from "react-bootstrap";
+import { toggleCategoryEditModel } from "../../pages/category/categorySlice";
 
 import {
 	addNewCategory,
 	fetchCategories,
 } from "../../pages/category/categoryAction";
 
+
 const initialState = {
 	name: "",
-};
-export const AddCategoryForm = () => {
-	const dispatch = useDispatch();
 
-	const { isLoading, status, message, categoryList } = useSelector(
+}
+
+export const EditCategoryForm = ({ categoryEdit }) => {
+	const dispatch = useDispatch();
+	console.log(categoryEdit);
+	const { isLoading, status, message, selectedCategory , show} = useSelector(
 		state => state.category
 	);
+	const [category, setCategory] = useState(categoryEdit);
 
 	useEffect(() => {
-		dispatch(fetchCategories());
-	}, [dispatch]);
-
-	const [category, setCategory] = useState(initialState);
+		setCategory(selectedCategory);
+	}, [dispatch, selectedCategory]);
 
 	const handleOnChange = e => {
 		const { name, value } = e.target;
@@ -35,12 +39,28 @@ export const AddCategoryForm = () => {
 
 	const handleOnSubmit = e => {
 		e.preventDefault();
-		dispatch(addNewCategory(category));
+		const  updateCat ={
+			_id : category._id,
+			parentCat : category.parentCat
+		}
+		dispatch(categoryUpdate(category));
 		///we going to find the way to call our server
+
+		console.log(category);
 	};
 
+	const toggleModal = e => {
+
+		dispatch(toggleCategoryEditModel())
+	}
+
+	
 	return (
+		<ModalBox 
+		show={show} 
+		toggleModal={toggleModal}>
 		<div className="add-category-form">
+			<ModalBox/>
 			{isLoading && <Spinner variant="primary" animation="border" />}
 
 			{message && (
@@ -51,7 +71,6 @@ export const AddCategoryForm = () => {
 			<Form onSubmit={handleOnSubmit}>
 				<Form.Row>
 					<Form.Group as={Col} controlId="">
-						<Form.Label>New Category</Form.Label>
 						<Form.Control
 							name="name"
 							type="text"
@@ -62,27 +81,13 @@ export const AddCategoryForm = () => {
 						/>
 					</Form.Group>
 
-					<Form.Group as={Col} controlId="formGridState">
-						<Form.Label>Select Parent Category</Form.Label>
-						<Form.Control
-							as="select"
-							name="parentCat"
-							onChange={handleOnChange}
-							// defaultValue={category.parentCat}
-						>
-							<option>Choose...</option>
-							{categoryList?.map((row, i) => (
-								<option key={i} value={row._id}>
-									{row.name}
-								</option>
-							))}
-						</Form.Control>
-					</Form.Group>
+					
+
+					<Button variant="primary" type="submit">
+						Submit
+					</Button>
 				</Form.Row>
-				<Button variant="primary" type="submit">
-					Submit
-				</Button>
 			</Form>
-		</div>
+		</div></ModalBox>
 	);
 };

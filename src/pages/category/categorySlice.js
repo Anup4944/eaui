@@ -1,49 +1,67 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isLoading: false,
-    status: "",
-    message: "",
-    categoryList: []
-}
-
+	isLoading: false,
+	status: "",
+	message: "",
+	categoryList: [],
+	show: false,
+	selectedCategory: "", 
+	updateCat
+};
 
 const categorySlice = createSlice({
-    name: "category", 
-    initialState,
-    reducers:{
-        requestPending:(state) =>{
-            state.isLoading = true
-        },
+	name: "category",
+	initialState,
+	reducers: {
+		requestPending: state => {
+			state.isLoading = true;
+		},
 
-        addCategorySuccess: (state, {payload}) =>{
-            state.isLoading = false
-            state.status = payload.status
-            state.message = payload.message
+		addCategorySuccess: (state, { payload }) => {
+			state.isLoading = false;
+			state.status = payload.status;
+			state.message = payload.message;
+		},
 
-        } ,
+		fetchAllCategorySuccess: (state, { payload }) => {
+			state.categoryList = payload.result;
+			state.isLoading = false;
+		},
+		toggleCategoryEditModel: state =>{
+			state.show  =!state.show
 
-        fetchAllCategorySuccess:(state, {payload}) =>{
-            state.categoryList = payload.result;
-            state.isLoading = false
-        },
+		},
 
-        deleteCats:(state, {payload}) =>{
-            state.categoryList = payload.result;
-            state.isLoading = false
-        },
+		selectACategory: (state,{payload}) =>{
+			state.selectedCategory  =!state.show
 
+		},
 
+		deleteCatsSuccess: (state, { payload }) => {
+			state.isLoading = false;
+			state.status = payload.status;
+			state.message = payload.message;
+		},
 
-        requestFail: (state, {payload}) => {
-            state.isLoading = false
-            state.status = payload.status
-            state.message = payload.message
-        }
-    }
-})
+		requestFail: (state, { payload }) => {
+			state.isLoading = false;
+			state.status = payload.status;
+			state.message = payload.message;
+		},
+	},
+});
 
+const { reducer, actions } = categorySlice;
 
-const {reducer,actions} =  categorySlice;
-export default reducer
-export const {requestPending, addCategorySuccess, fetchAllCategorySuccess, requestFail,deleteCats } = actions;
+export const {
+	requestPending,
+	addCategorySuccess,
+	fetchAllCategorySuccess,
+	toggleCategoryEditModel,
+	requestFail,
+	salectACategory,
+	deleteCatsSuccess,
+} = actions;
+
+export default reducer;

@@ -1,15 +1,12 @@
-import React from 'react'
-import DefaultLayout from '../../components/layout/DefaultLayout';
-import Footer from "../../components/layout/partials/Footer";
-import Header from "../../components/layout/partials/Header";
+import React from "react";
+import DefaultLayout from "../../components/layout/DefaultLayout";
 
 const Dashboard = () => {
-    return (
-        
-     <DefaultLayout> Welcome to the Admin Dashboard </DefaultLayout>
-            
-       
-    )
-}
+	return (
+		<DefaultLayout>
+			<div className="dashboard">Welcome to the Admin dashboard</div>
+		</DefaultLayout>
+	);
+};
 
-export default Dashboard
+export default Dashboard;

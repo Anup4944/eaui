@@ -1,59 +1,89 @@
-import React from 'react'
-import {  useSelector, useDispatch} from "react-redux";
-import {ListGroup, ListGroupItem,Button,span} from "react-bootstrap";
-import { removeCategories} from "../../pages/category/CategoryAction";
+import React, { useState } from "react";
+import { Button, ListGroup } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
+import { removeCategories } from "../../pages/category/categoryAction";
+import { EditCategoryForm } from "../edit-category-form/EditCategoryForm";
 
+import { toggleCategoryEditModel,selectedCategory } from "../../pages/category/categorySlice";
 
+export const ListCategory = () => {
+	const dispatch = useDispatch();
+	const { categoryList,selectedCategory } = useSelector(state => state.category);
 
-const ListCategory = () => {
-    const {categoryList} = useSelector(state => state.category);
-   
-    const topLevelCat = categoryList.filter(row=> !row.parentCat);
-    const childCat = categoryList.filter(row=> row.parentCat);
+	const [showForm, setShowForm] = useState("");
 
-    const handleOnDeleteClicked = (_id) => {
-        if(window.confirm("Are you going to delete the category?")){
+	const handleOnDeleteClicked = _id => {
+		if (window.confirm("Are you sure you want to delete the category?")) {
+			/// collection if _di
 
-        }
+			const childIds = categoryList.map(row => {
+				if (row.parentCat === _id) {
+					return row._id;
+				}
+			});
 
-        
-    }
-    
+			const idsToDelete = childIds.filter(row => row);
 
-    return (
-        <ListGroup>
-       {
-           topLevelCat.map((row,i) =>{
-               return(
-                   <>
-                     <ListGroup.Item key={i}>{row.name}
-                     <span ClassName="item-Buttons" style={{ marginLeft: "Scrum "}}>
-                     <Button varient="danger" >DELETE</Button></span>
-                     
-                     </ListGroup.Item>
-        {childCat.map(item=> item.parentCat === row._id && (
-                <ListGroup.Item key={i}> { `--> ${item.name}`}
-                <span ClassName="item-Buttons" style={{ marginLeft: "Scrum "}}>
-                 <Button varient="danger">EDIT</Button></span>
-                
-                </ListGroup.Item>
-            )
-        )}
+			dispatch(removeCategories([...idsToDelete, _id]));
+		}
+	};
 
-                   
-                   
-                   </>
-               )
-           })
-       }
-       
+	const handleEdit = _id => {
+		dispatch(toggleCategoryEditModel())
+		console.log(_id);
 
-        </ListGroup>
-       
-      
-    
-    )}
+		const catItm = selectedCategory.filter(row => row)[0];
+		// showForm === _id ? setShowForm("") : setShowForm(_id);
+		dispatch(selectedCategory(catItm));
+	};
 
-export default ListCategory
+	const topLevelCats = categoryList.filter(row => !row.parentCat);
+	const childCats = categoryList.filter(row => row.parentCat);
 
+	return (
+		<>
+		<EditCategoryForm/>
+		<ListGroup>
+			{topLevelCats.map((row, i) => {
+				return (
+					<div>
+						<ListGroup.Item key={row._id}>
+							{row.name}
+							<span className="item-buttons ml-5">
+								<Button onClick={() => handleEdit(row._id)}>Edit</Button>
+								<Button
+									variant="danger"
+									onClick={() => handleOnDeleteClicked(row._id)}
+								>
+									Delete
+								</Button>
+							</span>
+
+							{showForm === row._id && <EditCategoryForm categoryEdit={row} />}
+						</ListGroup.Item>
+						{childCats.map(
+							itm =>
+								itm.parentCat === row._id && (
+									<ListGroup.Item key={itm._id}>
+										{`--> ${itm.name}`}
+
+										<span className="item-buttons ml-5">
+											<Button onClick={() => handleEdit(row._id)}>Edit</Button>
+											<Button
+												variant="danger"
+												onClick={() => handleOnDeleteClicked(itm._id)}
+											>
+												Delete
+											</Button>
+										</span>
+										
+									</ListGroup.Item>
+								)
+						)}
+					</div>
+				);
+			})}
+		</ListGroup>
+	 </>);
+};

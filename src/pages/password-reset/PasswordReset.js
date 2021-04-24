@@ -1,15 +1,13 @@
-import React from 'react';
-import { PasswordResetForm } from "../../components/password-reset-form/PasswordResetForm";
+import React from "react";
+import { PasswordResetForm } from "../../components/password-reset-form/PasssordResetForm";
+import "./passwordReset.style.css";
 
-import './passwordReset.style.css'
+const PassworReset = () => {
+	return (
+		<div className="password-reset-page bg-dark">
+			<PasswordResetForm />
+		</div>
+	);
+};
 
-
-const PasswordReset = () => {
-   return <div className="login-page bg-primary">
-    <PasswordResetForm />
-
-    
-</div>
-}
-
-export default PasswordReset;
+export default PassworReset;
