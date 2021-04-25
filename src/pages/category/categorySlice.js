@@ -7,7 +7,7 @@ const initialState = {
 	categoryList: [],
 	show: false,
 	selectedCategory: "", 
-	updateCat
+	
 };
 
 const categorySlice = createSlice({

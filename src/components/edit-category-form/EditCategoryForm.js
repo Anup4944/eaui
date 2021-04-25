@@ -43,7 +43,7 @@ export const EditCategoryForm = ({ categoryEdit }) => {
 			_id : category._id,
 			parentCat : category.parentCat
 		}
-		dispatch(categoryUpdate(category));
+		// dispatch(categoryUpdate(category));
 		///we going to find the way to call our server
 
 		console.log(category);
@@ -74,7 +74,7 @@ export const EditCategoryForm = ({ categoryEdit }) => {
 						<Form.Control
 							name="name"
 							type="text"
-							value={category.name}
+							// value={category.name}
 							onChange={handleOnChange}
 							placeholder="Enter New Category"
 							required

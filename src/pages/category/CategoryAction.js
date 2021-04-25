@@ -12,7 +12,7 @@ import {
 	deleteCategories,
 	updateCategories,
 } from "../../apis/categoriAPI";
-import { updateCategory } from "../../../../e-commerce_admin-api/models/category/Category.model";
+// import { updateCategory } from "../../../../e-commerce_admin-api/models/category/Category.model";
 
 export const addNewCategory = frmDt => async dispatch => {
 	try {
@@ -74,7 +74,7 @@ export const CategoriesUpdate = frmDt => async dispatch => {
 	try {
 		dispatch(requestPending());
 
-		const result = await updateCategories(idArg); //{status, message, result:[]}
+		const result = await updateCategories(); //{status, message, result:[]}
 
 		dispatch(deleteCatsSuccess(result));
 
