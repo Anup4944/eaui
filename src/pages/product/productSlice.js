@@ -6,7 +6,6 @@ const initialState = {
 	message: "",
 	deleteMsg: "",
 	productList: [],
-	
 };
 
 const productSlice = createSlice({
@@ -32,8 +31,6 @@ const productSlice = createSlice({
 			state.status = payload.status;
 			state.deleteMsg = payload.message;
 		},
-
-		
 
 		requestFail: (state, { payload }) => {
 			state.isLoading = false;

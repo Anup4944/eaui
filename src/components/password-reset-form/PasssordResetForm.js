@@ -40,7 +40,7 @@ export const PasswordResetForm = () => {
 				</Form>
 
 				<a href="/" className="text-right">
-					Login Now ?
+					Ready to Login Now ?
 				</a>
 			</Card>
 		</div>

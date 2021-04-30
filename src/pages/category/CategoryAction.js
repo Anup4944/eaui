@@ -4,15 +4,15 @@ import {
 	fetchAllCategorySuccess,
 	requestFail,
 	deleteCatsSuccess,
+	updateCategorySuccess,
 } from "./categorySlice";
 
 import {
 	saveCategory,
 	getCategories,
 	deleteCategories,
-	updateCategories,
+	updateCategory,
 } from "../../apis/categoriAPI";
-// import { updateCategory } from "../../../../e-commerce_admin-api/models/category/Category.model";
 
 export const addNewCategory = frmDt => async dispatch => {
 	try {
@@ -69,14 +69,13 @@ export const removeCategories = idArg => async dispatch => {
 	}
 };
 
-
-export const CategoriesUpdate = frmDt => async dispatch => {
+export const categoryUpdate = formData => async dispatch => {
 	try {
 		dispatch(requestPending());
 
-		const result = await updateCategories(); //{status, message, result:[]}
+		const result = await updateCategory(formData); //{status, message, result:[]}
 
-		dispatch(deleteCatsSuccess(result));
+		dispatch(updateCategorySuccess(result));
 
 		result.status === "success" && dispatch(fetchCategories());
 	} catch (error) {
