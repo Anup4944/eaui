@@ -5,6 +5,7 @@ import "./passwordReset.style.css";
 
 export const PasswordResetForm = () => {
 	const [email, setEmail] = useState("");
+	
 
 	const handleOnChange = e => {
 		const { value } = e.target;
@@ -40,7 +41,7 @@ export const PasswordResetForm = () => {
 				</Form>
 
 				<a href="/" className="text-right">
-					Ready to Login Now ?
+					Ready to Login Now
 				</a>
 			</Card>
 		</div>

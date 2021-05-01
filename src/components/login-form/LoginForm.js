@@ -8,8 +8,8 @@ import { updateLogin } from "../../pages/login/loginSlice";
 import "./loginForm.style.css";
 
 const initialState = {
-	email: "b@c.com",
-	password: "123456",
+	email: "aaa@gmail.com",
+	password: "12345",
 };
 export const LoginForm = () => {
 	const history = useHistory();
@@ -29,7 +29,7 @@ export const LoginForm = () => {
 
 		!isAuth && dispatch(userAutoLogin());
 
-		if (isAuth) history.replace(from);
+		if (isAuth) history.push("/dashboard");
 	}, [isAuth]);
 
 	const handleOnChange = e => {

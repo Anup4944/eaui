@@ -32,8 +32,8 @@ const SideBarNav = () => {
 					</Link>
 				</li>
 				<li>
-					<Link to="/account">
-						<i className="fas fa-cogs text-success"></i> Account
+					<Link to="/profile">
+						<i className="fas fa-cogs text-success"></i> Profile
 					</Link>
 				</li>
 			</ul>
