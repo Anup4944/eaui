@@ -3,7 +3,7 @@ import categoryReducer from "./pages/category/categorySlice";
 import productReducer from "./pages/product/productSlice";
 import selectedProductReducer from "./pages/edit-product/selectedProductSlice";
 import loginReducer from "./pages/login/loginSlice";
-import  profileReducer from "./pages/profile/profileSlice";
+import profileReducer from "./pages/profile/profileSlice";
 
 const store = configureStore({
 	reducer: {

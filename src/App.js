@@ -8,10 +8,9 @@ import Product from "./pages/product/Product";
 import AddProduct from "./pages/product/AddProduct";
 import EditProduct from "./pages/edit-product/EditProduct";
 import { PrivateRoute } from "./components/private-route/PrivateRoute";
-import { Profile} from "./pages/profile/profile.js";
+import Profile from "./pages/profile/Profile";
 
 import "./App.css";
-
 
 function App() {
 	return (

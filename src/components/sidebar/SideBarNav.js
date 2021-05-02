@@ -33,7 +33,7 @@ const SideBarNav = () => {
 				</li>
 				<li>
 					<Link to="/profile">
-						<i className="fas fa-cogs text-success"></i> Profile
+						<i className="fas fa-cogs text-success"></i> Account
 					</Link>
 				</li>
 			</ul>

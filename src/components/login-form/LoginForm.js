@@ -8,8 +8,8 @@ import { updateLogin } from "../../pages/login/loginSlice";
 import "./loginForm.style.css";
 
 const initialState = {
-	email: "aaa@gmail.com",
-	password: "12345",
+	email: "b@c.com",
+	password: "123456",
 };
 export const LoginForm = () => {
 	const history = useHistory();
@@ -27,9 +27,10 @@ export const LoginForm = () => {
 	useEffect(() => {
 		// !isAuth && sessionStorage.getItem("accessJWT") && dispatch(updateLogin());
 
-		!isAuth && dispatch(userAutoLogin());
-
+		// if (isAuth) history.replace(from);
 		if (isAuth) history.push("/dashboard");
+
+		!isAuth && dispatch(userAutoLogin());
 	}, [isAuth]);
 
 	const handleOnChange = e => {

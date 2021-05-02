@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
-
+import { useSelector, useDispatch } from "react-redux";
+import { reqOtpForNewPassword } from "../../pages/profile/profileAction";
 import "./passwordReset.style.css";
 
 export const PasswordResetForm = () => {
+	const dispatch = useDispatch();
+
 	const [email, setEmail] = useState("");
-	
 
 	const handleOnChange = e => {
 		const { value } = e.target;
@@ -16,6 +18,11 @@ export const PasswordResetForm = () => {
 	const handOnSubmit = e => {
 		e.preventDefault();
 
+		if (!email) {
+			return alert("Please enter the email");
+		}
+
+		dispatch(reqOtpForNewPassword(email));
 		console.log(email);
 	};
 
@@ -41,7 +48,7 @@ export const PasswordResetForm = () => {
 				</Form>
 
 				<a href="/" className="text-right">
-					Ready to Login Now
+					Login Now ?
 				</a>
 			</Card>
 		</div>

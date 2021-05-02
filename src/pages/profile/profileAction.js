@@ -1,17 +1,19 @@
-
-import {requestPending,getProfileSuccess,passwordResetOtpRequest,requestFail  } from "./profileSlice";
+import {
+	requestPending,
+	getProfileSuccess,
+	requestFail,
+	passwordRestOTPRequest,
+} from "./profileSlice";
 
 import { passOtpRequestAPI } from "../../apis/profileAPI";
 
-export const reqOtpForPassword = email => async dispatch => {
+export const reqOtpForNewPassword = email => async dispatch => {
 	try {
 		dispatch(requestPending());
 
-		const result = await passOtpRequestAPI(email); 
-		console.log(result);
-		dispatch(passwordResetOtpRequest(result));
-		result.status = "success" && dispatch(getProfileSuccess(result.user))
-		
+		const result = await passOtpRequestAPI(email); //return {status, message, user, tokens..}
+
+		dispatch(passwordRestOTPRequest(result));
 	} catch (error) {
 		const err = {
 			status: "error",

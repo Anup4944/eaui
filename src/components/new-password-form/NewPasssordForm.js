@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-
 import { Card, Form, Button } from "react-bootstrap";
-
-import "./newpasswordReset.style.css";
+import { useSelector } from "react-redux";
+import "./newPassordForm.style.css";
 
 const initialState = {
 	otp: "",
-	password : "",
-	confirmPassword: "" 
-}
-
-export const NewPasswordResetForm = () => {
-	
-	const {password, setNewpassword} = useState(initialState);
-	
-	
+	password: "",
+	confirmPassword: "",
+};
+export const NewPasswordForm = () => {
+	const [newPassword, setNewPassword] = useState(initialState);
 
 	const handleOnChange = e => {
-		const { value } = e.target;
+		const { name, value } = e.target;
 
 		setNewPassword({
 			...newPassword,
-			[name] : value,
+			[name]: value,
 		});
 	};
 
@@ -36,31 +31,35 @@ export const NewPasswordResetForm = () => {
 			<Card className="p-4">
 				<Form onSubmit={handOnSubmit}>
 					<Form.Group controlId="formBasicEmail">
+						<Form.Label>OTP</Form.Label>
+						<Form.Control
+							name="otp"
+							value={newPassword.otp}
+							onChange={handleOnChange}
+							placeholder="Enter OTP"
+							required
+						/>
+					</Form.Group>
+					<Form.Group>
 						<Form.Label>New Password</Form.Label>
 						<Form.Control
-							name="email"
-							type="email"
-							value={email}
+							name="password"
+							value={newPassword.password}
 							onChange={handleOnChange}
-							placeholder="Enter password"
+							placeholder="Enter Password"
 							required
 						/>
 					</Form.Group>
-
-
-
-					<Form.Group controlId="formBasicEmail">
-						<Form.Label>New Password Again </Form.Label>
+					<Form.Group>
+						<Form.Label>Confirm Password</Form.Label>
 						<Form.Control
-							name="email"
-							type="email"
-							value={email}
+							name="confirmPassword"
+							value={newPassword.confirmPassword}
 							onChange={handleOnChange}
-							placeholder="Enter password"
+							placeholder="Confirm Password"
 							required
 						/>
 					</Form.Group>
-					
 
 					<Button variant="primary" type="submit">
 						Submit
@@ -68,7 +67,7 @@ export const NewPasswordResetForm = () => {
 				</Form>
 
 				<a href="/" className="text-right">
-					Ready to Login Now
+					Login Now!
 				</a>
 			</Card>
 		</div>

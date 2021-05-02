@@ -2,10 +2,13 @@ import {
 	requestPending,
 	loginSuccess,
 	updateLogin,
-	requestFail,
 	logoutSuccess,
+	requestFail,
+	passwordRestOTPRequest,
 } from "./loginSlice";
+
 import { getProfileSuccess } from "../profile/profileSlice";
+import { adminLogoutAPI } from "../../apis/profileAPI";
 import { loginAPI } from "../../apis/loginAPI";
 import { tokenAPI } from "../../apis/tokenAPI";
 
@@ -22,7 +25,7 @@ export const sendLogin = formData => async dispatch => {
 		//if we get tokens for server, we need to store in our browser storeage
 
 		dispatch(loginSuccess(result));
-		result.status = "success" && dispatch(getProfileSuccess(result.user))
+		result.status === "success" && dispatch(getProfileSuccess(result.user));
 	} catch (error) {
 		const err = {
 			status: "error",
@@ -51,18 +54,13 @@ export const userAutoLogin = () => async dispatch => {
 	}
 };
 
-export const logOut = () => dispatch => {
+export const logOut = _id => dispatch => {
 	// clear browse storage
 	sessionStorage.removeItem("accessJWT");
 	localStorage.removeItem("ourEcommerceRJWT");
 
 	dispatch(logoutSuccess());
+	adminLogoutAPI(_id);
 
 	// remove tokens form our server
 };
-
-
-
-// passwrod stuff 
-
-

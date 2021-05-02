@@ -5,7 +5,6 @@ const initialState = {
 	loginResponse: {},
 
 	isAuth: false,
-
 };
 
 const loginSlice = createSlice({
@@ -47,9 +46,8 @@ export const {
 	requestPending,
 	loginSuccess,
 	updateLogin,
-	requestFail,
 	logoutSuccess,
+	requestFail,
 } = actions;
 
 export default reducer;
-
